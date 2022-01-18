@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/Images">
+        <file alias="Splashscreen7">Images/SplashScreen7.png</file>
+        <file alias="Background">Images/Cine-file-suite.ico</file>
+        <file alias="Logo_KDM_Manager">Images/Logo_KDM_Manager.png</file>
+        <file alias="Logo_KDM_Lister">Images/Logo_KDM_Lister.png</file>
+        <file alias="Logo_About">Images/Logo_About.png</file>
+        <file alias="Logo_Parametre">Images/Logo_Parametre.png</file>
+        <file alias="Logo_Quitter">Images/Logo_Quitter.png</file>
+    </qresource>
+    <qresource prefix="/Son">
+        <file alias="hit_mur">Son/pingMur.wav</file>
+        <file alias="hit_raquette">Son/pingRaquette.wav</file>
+		<file alias="Launch">Son/WinXP.wav</file>
+    </qresource>
+</RCC>
