@@ -2,6 +2,8 @@
 
 //Project still in WIP
 
+Framework QT
+
 Cine file suite est un ensemble de logiciel pour le cinéma itinérant.
 Il est composé de deux logiciel "KDM manager" et "KDM Lister".
 
