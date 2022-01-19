@@ -2,6 +2,10 @@
 
 //Project still in WIP
 
+Objectif:
+Comprendre comment composer et interagir avec une GUI
+Transformer un code "mode console" en "Mode interface homme machine"
+
 Framework QT
 
 Cine file suite est un ensemble de logiciel pour le cinéma itinérant.
