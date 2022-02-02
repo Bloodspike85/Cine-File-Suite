@@ -47,6 +47,7 @@ class kdm
     static std::string Get_The_Movie_Type(std::string &FileName);
     static std::string Get_Movie_Language(std::string &FileName);
     static std::string Get_Movie_Audio(std::string &FileName);
+    static bool Is_Ocap(std::string &FileName);
 
     static std::string Get_Projecteur_Name(std::string Numero_de_serveur);
 

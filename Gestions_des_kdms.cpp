@@ -550,18 +550,63 @@ std::string kdm::Get_Movie_Language(std::string &FileName)
 
                 if (Temporaire.find("FR-") != std::string::npos)//Francais/
                 {
+                    if(Is_Ocap(FileName))
+                    {
+                        return "FR_OCAP";
+                    }
+                    else
+                    {
+                        return "FR";
+                    }
 
-                    return "FR";
                 }
                 else if (Temporaire.find("EN-") != std::string::npos)//Anglais//
                 {
 
-                    return "EN";
+                    if(Is_Ocap(FileName))
+                    {
+                        return "EN_OCAP";
+                    }
+                    else
+                    {
+                        return "EN";
+                    }
                 }
                 else if (Temporaire.find("ES-") != std::string::npos)//Espagnol//
                 {
 
-                    return "ES";
+                    if(Is_Ocap(FileName))
+                    {
+                        return "ES_OCAP";
+                    }
+                    else
+                    {
+                        return "ES";
+                    }
+                }
+                else if (Temporaire.find("JA-") != std::string::npos)//Japonais//
+                {
+
+                    if(Is_Ocap(FileName))
+                    {
+                        return "JA_OCAP";
+                    }
+                    else
+                    {
+                        return "JA";
+                    }
+                }
+                else if (Temporaire.find("AR-") != std::string::npos)//Arabe//
+                {
+
+                    if(Is_Ocap(FileName))
+                    {
+                        return "AR_OCAP";
+                    }
+                    else
+                    {
+                        return "AR";
+                    }
                 }
                 else
                 {
@@ -621,6 +666,44 @@ std::string kdm::Get_Movie_Audio(std::string &FileName)
 
 
 }
+
+bool kdm::Is_Ocap(std::string &FileName)
+{
+
+    std::ifstream Fichier_A_Tester(FileName);
+
+    if(Fichier_A_Tester)
+    {
+        std::string Temporaire = "";
+        std::string Nom_Du_Film = "";
+
+        while (std::getline(Fichier_A_Tester,Temporaire))
+        {
+            if (Temporaire.find("<ContentTitleText>") != std::string::npos)//Si c'est une KDM//
+            {
+
+                if (Temporaire.find("OCAP") != std::string::npos || Temporaire.find("_51-") != std::string::npos)
+                {
+
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+    }
+
+    return false;
+
+
+
+
+
+}
+
+
 
 
 
