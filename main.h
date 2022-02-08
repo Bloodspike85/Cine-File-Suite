@@ -23,7 +23,7 @@
 
 
 
-#define KDM_MANAGER_VERSION "KDM_MANAGER V 2.1"
+#define KDM_MANAGER_VERSION "KDM_MANAGER V 2.2"
 #define KDM_LISTER_VERSION  "KDM_LISTER V 1.0"
 #define FichierConfiguration "Config.cfs"
 

@@ -318,6 +318,10 @@ std::string kdm::Get_Movie_Name(std::string &FileName)
             }
         }
     }
+    else
+    {
+        std::cerr << "Erreur fichier " << FileName << std::endl;
+    }
 
     return std::string("ERREUR");
 }
@@ -365,6 +369,10 @@ std::string kdm::Get_Start_Validity_Date(std::string &FileName)
         }
 
      }
+    else
+    {
+        std::cerr << "Erreur fichier " << FileName << std::endl;
+    }
 
     return std::string("ERREUR");
 
@@ -398,10 +406,7 @@ std::string kdm::Get_End_Validity_Date(std::string &FileName)
                             if (Temporaire[j] == 'T')
                             {
                                 Date_De_Fin_De_Validite_Du_Film = Temporaire.substr(i, j - i);
-                                //Dsearch->JourKDMDebut  = DateMoisEtJour(Dsearch->DateDeDebutDeValidite.c_str(), 8);
-                                //Dsearch->MoisKDMDebut  = DateMoisEtJour(Dsearch->DateDeDebutDeValidite.c_str(), 5);
-                                //Dsearch->AnneeKDMDebut = DateAnnee(Dsearch->DateDeDebutDeValidite.c_str(), 0);
-                                //Dsearch->File1.close();
+
 
                                 return Date_De_Fin_De_Validite_Du_Film;
                             }
@@ -414,6 +419,10 @@ std::string kdm::Get_End_Validity_Date(std::string &FileName)
         }
 
      }
+    else
+    {
+        std::cerr << "Erreur fichier " << FileName << std::endl;
+    }
 
     return std::string("ERREUR");
 
@@ -454,6 +463,10 @@ std::string kdm::Get_The_Movie_Type(std::string &FileName)
         }
 
      }
+    else
+    {
+        std::cerr << "Erreur fichier " << FileName << std::endl;
+    }
 
     return std::string("ERREUR");
 
@@ -550,7 +563,7 @@ std::string kdm::Get_Movie_Language(std::string &FileName)
 
                 if (Temporaire.find("FR-") != std::string::npos)//Francais/
                 {
-                    if(Is_Ocap(FileName))
+                    if(Is_Ocap(Temporaire))
                     {
                         return "FR_OCAP";
                     }
@@ -563,7 +576,7 @@ std::string kdm::Get_Movie_Language(std::string &FileName)
                 else if (Temporaire.find("EN-") != std::string::npos)//Anglais//
                 {
 
-                    if(Is_Ocap(FileName))
+                    if(Is_Ocap(Temporaire))
                     {
                         return "EN_OCAP";
                     }
@@ -575,7 +588,7 @@ std::string kdm::Get_Movie_Language(std::string &FileName)
                 else if (Temporaire.find("ES-") != std::string::npos)//Espagnol//
                 {
 
-                    if(Is_Ocap(FileName))
+                    if(Is_Ocap(Temporaire))
                     {
                         return "ES_OCAP";
                     }
@@ -587,7 +600,7 @@ std::string kdm::Get_Movie_Language(std::string &FileName)
                 else if (Temporaire.find("JA-") != std::string::npos)//Japonais//
                 {
 
-                    if(Is_Ocap(FileName))
+                    if(Is_Ocap(Temporaire))
                     {
                         return "JA_OCAP";
                     }
@@ -599,7 +612,7 @@ std::string kdm::Get_Movie_Language(std::string &FileName)
                 else if (Temporaire.find("AR-") != std::string::npos)//Arabe//
                 {
 
-                    if(Is_Ocap(FileName))
+                    if(Is_Ocap(Temporaire))
                     {
                         return "AR_OCAP";
                     }
@@ -615,6 +628,10 @@ std::string kdm::Get_Movie_Language(std::string &FileName)
                 }
             }
         }
+    }
+    else
+    {
+        std::cerr << "Erreur fichier " << FileName << std::endl;
     }
 
     return std::string("ERREUR");
@@ -640,12 +657,12 @@ std::string kdm::Get_Movie_Audio(std::string &FileName)
             if (Temporaire.find("<ContentTitleText>") != std::string::npos)//Si c'est une KDM//
             {
 
-                if (Temporaire.find("_51_") != std::string::npos || Temporaire.find("_51-") != std::string::npos)
+                if (Temporaire.find("_51_") != std::string::npos )
                 {
 
                     return "51";
                 }
-                else if (Temporaire.find("_71_") != std::string::npos || Temporaire.find("_71-") != std::string::npos)
+                else if (Temporaire.find("_71_") != std::string::npos)
                 {
 
                     return "EN";
@@ -658,6 +675,10 @@ std::string kdm::Get_Movie_Audio(std::string &FileName)
             }
         }
     }
+    else
+    {
+        std::cerr << "Erreur fichier " << FileName << std::endl;
+    }
 
     return std::string("ERREUR");
 
@@ -667,39 +688,26 @@ std::string kdm::Get_Movie_Audio(std::string &FileName)
 
 }
 
-bool kdm::Is_Ocap(std::string &FileName)
+bool kdm::Is_Ocap(std::string FileName)
 {
 
-    std::ifstream Fichier_A_Tester(FileName);
 
-    if(Fichier_A_Tester)
+    std::cout << FileName << std::endl;
+
+    if(FileName.find("OCAP") != std::string::npos )
     {
-        std::string Temporaire = "";
-        std::string Nom_Du_Film = "";
 
-        while (std::getline(Fichier_A_Tester,Temporaire))
-        {
-            if (Temporaire.find("<ContentTitleText>") != std::string::npos)//Si c'est une KDM//
-            {
-
-                if (Temporaire.find("OCAP") != std::string::npos || Temporaire.find("_51-") != std::string::npos)
-                {
-
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
+        return true;
+    }
+    else
+    {
+        return false;
     }
 
+
+
+
     return false;
-
-
-
-
 
 }
 
