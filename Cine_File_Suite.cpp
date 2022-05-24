@@ -13,6 +13,8 @@
 
 Cine_File_Suite::Cine_File_Suite(QWidget *Fenetre_Principal):QWidget()
 {
+
+
     Fenetre_Principal_Widget = new QWidget;
     Fenetre_Principal_Widget = Fenetre_Principal;
     Temp_Serveur_Number_Holder = 0;
@@ -275,6 +277,26 @@ QWidget* Cine_File_Suite::Creation_Liste_Projecteur()
 
 QWidget* Cine_File_Suite::Creation_Interface_Graphique()
 {
+     QLabel *Connection_status ;
+    if(is_connected_to_internet())
+    {
+        std::cerr << "Connecté à internet " << std::endl;
+        Connection_status = new QLabel("Connecté à internet");
+        Connection_status->setStyleSheet("background : #cdf0c6;");
+
+    }
+    else
+    {
+        std::cerr << "Aucune connection à internet " << std::endl;
+        Connection_status = new QLabel("Aucune connection à internet");
+
+        Connection_status->setStyleSheet("background : #ffc6c4;");
+    }
+
+    Connection_status->setMinimumSize(Largeur_Fenetre,20);
+
+
+
 
     App_State = "KDM_MANAGER"; // Application par défaut
     Read_Configuration_File();
@@ -364,6 +386,7 @@ QWidget* Cine_File_Suite::Creation_Interface_Graphique()
 
     qDebug() << "Création du layout complet" ;
     Cine_File_Suite_Layout = new QVBoxLayout(this);
+    Cine_File_Suite_Layout->addWidget(Connection_status);
     Cine_File_Suite_Layout->addWidget(Cine_file_suite_menuBar);
     Cine_File_Suite_Layout->addLayout(Cine_File_Suite_App_Layout);
     Cine_File_Suite_Layout->addWidget(Cine_File_Suite_App_Selectionnee);
@@ -398,9 +421,11 @@ QWidget* Cine_File_Suite::Creation_Fenetre_Option()
     Connection_Administrateur_GroupBox->setLayout(Connection_Administrateur_Layout);
     User_Name = new QLineEdit();
     User_Name->setMaximumWidth(100);
+    User_Name->setPlaceholderText("Nom d'utilisateur");
 
     Password = new QLineEdit();
     Password->setMaximumWidth(100);
+    Password->setPlaceholderText("Mot de passe");
 
     Security_Test = new QPushButton("Connection");
     Security_Test->setMaximumWidth(200);

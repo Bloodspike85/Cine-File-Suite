@@ -10,7 +10,7 @@
 #include <QSplashScreen>
 
 
-#include <QDesktopWidget>
+#include <QScreen>
 #include <QThread>
 #include <stdio.h>
 #include <stdlib.h>
@@ -43,7 +43,7 @@ public :
     static QRect Get_Resolution_Ecran()
     {
 
-        return qApp->desktop()->availableGeometry();
+        return qApp->primaryScreen()->availableGeometry();
 
     }
 };

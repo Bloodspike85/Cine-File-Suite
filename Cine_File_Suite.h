@@ -8,10 +8,13 @@
     #include <sys/types.h>
 #endif // !WIN32
 
+
 #include <QApplication>
 #include <QScreen>
 #include "QToolButton"
 #include "QLayout"
+#include <QDesktopServices>
+#include <QProcess>
 
 #include <fstream>
 #include <iostream>
@@ -79,6 +82,21 @@ public slots :
     void Launch_Jeu();
 
 private :
+
+    //Vérification si le logiciel à acces à internet
+    bool is_connected_to_internet()
+    {
+        // à implémenter
+        if(QProcess::execute("ping -n 1 www.google.com") == 0)
+        {
+               return true;
+        }
+        else
+        {
+               return false;
+        }
+
+    }
 
     //On recupere le pointeur de la fenetre principal
     QWidget *Fenetre_Principal_Widget;
